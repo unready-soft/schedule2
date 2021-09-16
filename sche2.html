@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <body class="title">
+   <!-- 目標 -->
+   <div class="side_posi"><!--目標todoを並べる-->
+     <div class="obj_koma">   <!--obj_koma start-->
+       <h1>Target</h1>
+       <div class=" width_auto">        <!--今年のひとまとまり-->
+        <div class="side_posi width_auto">    <!--コメントと並べる-->
+        <div>  <!--今年、入力のまとまり-->
+         <div class="obj_font">This&nbsp;year</div>
+           <div>  <!--目標、入力のまとまり-->
+             <div><button id='year_open' class='ymw_name obj_button' onclick='year_change()' >Please&nbsp;input&nbsp;your&nbsp;target</button></div>
+             <div id ='year_id' class="this_year side_posi"> <!--クリックで表示--> 
+               <input type='text' id = 'this_year_text'/>
+               <button id='this_year_k' onclick="year_k()">push</button>
+             </div> <!--クリックで表示-->
+           </div>    <!--目標、入力のまとまり-->
+        </div>  <!--今年、入力のまとまり-->
+           <textarea id='year_com' class="huki-left" placeholder="content"></textarea>
+         </div>  <!--コメントと並べる-->
+       </div>    <!--今年のひとまとまり-->
+       <div class=" width_auto">        <!--今月のひとまとまり-->
+        <div class="side_posi width_auto">    <!--コメントと並べる-->
+          <div> <!--今月、入力のまとまり-->
+         <div class="obj_font">This&nbsp;month</div>
+
+           <div>  <!--目標、入力のまとまり-->
+             <div><button id='month_open' class='ymw_name obj_button' onclick='month_change()' >Please&nbsp;input&nbsp;your&nbsp;target</button></div>
+             <div id ='month_id' class="this_year side_posi"> <!--クリックで表示--> 
+               <input type='text' id = 'this_month_text'/>
+               <button id='this_month_k' onclick="month_k()">push</button>
+             </div> <!--クリックで表示-->
+           </div>    <!--目標、入力のまとまり-->
+           </div>   <!--今月、入力のまとまり-->
+           <textarea id='month_com' class="huki-left" placeholder="content"></textarea>
+         </div>  <!--コメントと並べる-->
+       </div>    <!--今月のひとまとまり-->
+       <div class=" width_auto">        <!--今週のひとまとまり-->
+        <div class="side_posi width_auto">    <!--コメントと並べる-->
+          <div> <!--今週、入力のまとまり-->
+            <div class="obj_font">This&nbsp;week</div>
+           <div>  <!--目標、入力のまとまり-->
+             <div><button id='week_open' class='ymw_name obj_button' onclick='week_change()' >Please&nbsp;input&nbsp;your&nbsp;target</button></div>
+             <div id ='week_id' class="this_year side_posi"> <!--クリックで表示--> 
+               <input type='text' id = 'this_week_text'/>
+               <button id='this_week_k' onclick="week_k()">push</button>
+             </div> <!--クリックで表示-->
+           </div>    <!--目標、入力のまとまり-->
+           </div>     <!--今週、入力のまとまり-->
+           <textarea id='week_com' class="huki-left" placeholder="content"></textarea>
+         </div>  <!--コメントと並べる-->
+       </div>    <!--今週のひとまとまり-->
+     </div>　　<!--obj_koma Last-->
+          <!-- to doリスト -->
+          <div class="todo_koma"> <!--todoひとまとまり-->
+            <div class="todo-left">
+             <h1>Today's work</h1>
+             <input id = 'mytext_todo'/>
+             <button onclick="make_todo()" class="add_button">add</button>
+             <button onclick="all_clear()" class="all_clear_button">All&nbsp;clear</button>
+             <div class='todo_container'></div>      <!-- チェックボックスの表示場所 -->
+            </div>
+           <div class="todo-right"></div>
+          </div>　　　<!--todoひとまとまり-->
+   </div> <!--目標todoを並べる Last-->
+     <!-- schedule棒グラフの表示 -->
+  <div class="sch_koma">
+     <h1>schedule</h1>
+     Please&nbsp;double-click&nbsp;on&nbsp;button&nbsp;you&nbsp;made&nbsp;bottom.
+     <div>The&nbsp;time&nbsp;you're&nbsp;going&nbsp;to&nbsp;active&nbsp;is
+     <input id='schedule_time' type="text" placeholder="input figure"/>minutes。</div>
+     <div id='selected_schedule'></div>
+     <div class='backboard_schedule' onclick="schedule(event)"></div>
+     <div>24____23____22____21____20____19____18____17____16____15____14____13____12____11____10____9____8____7____6____5____4____3____2____1____0
+     </div>
+   </div>  
+   <!-- real棒グラフの表示 -->
+ <div class="re_koma">
+    <h1>real</h1>
+    
+    <div class='gragh_container backboard_schedule'></div> <!--停止ボタン押したら棒グラフを作成-->
+    <div>24____23____22____21____20____19____18____17____16____15____14____13____12____11____10____9____8____7____6____5____4____3____2____1____0
+    </div>
+ </div>
+
+ <div class="side_posi">      <!--runnning,active,passive,restとおみくじを並べる最初-->
+  <div>         <!--run,action,passive,restをひとまとまりに-->
+    <!--実行中のところ-->
+   <div class="run_box">
+   　<div class="side_posi box-left">           <!--css-->
+ 　    <div class ='time_show active_name_font_size'></div>　<!--活動内容の表示-->
+  　   <span class = 'zikkoutyuu'>running</span>    <!--実行中の表示場所-->
+   　  <button id='stop' onclick=stop() class="all_clear_button">stop</button>
+    </div>
+    <div class="box-right">
+     <div class='side_posi run_font_size'>START<!--css-->
+   　 <div class ='time'></div>       <!--活動はじめ時間の表示-->
+     </div>
+     <div class='side_posi run_font_size'>STOP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <!--css-->
+       <div class ='stop_time'></div>　<!--停止時間の表示-->
+     </div>
+     <div class='side_posi run_font_size'>TIME&nbsp;&nbsp; <!--css-->
+       <div class ='keep_time'></div>　<!--活動時間の表示-->
+     </div>
+     </div>
+   </div>  
+    <!-- active -->
+   　 <div class="side_posi"> <!--active、passiveとrestを並べる最初-->
+    　  <div class='action_title ap_koma'>
+      　  <div class = "side_posi">
+        　  <div class=" active">
+          　  <h2>active</h2>
+            　<input id='mytext' type="text"  placeholder="make a button"/>
+    　        <input type="button" onclick="show()" value="add"/>
+      　      <div class='active_container'></div>  <!-- activeボタンの表示場所 -->
+        　  </div> 
+            <div id='start'></div>
+　          <!-- inactive -->
+  　        <div class=" inactive">
+    　        <h2>inactive</h2>
+      　      <input id='mytext_inactive' type='text'  placeholder="make a button"/>
+        　    <button onclick="show_inactive()">add</button>
+          　  <div class = 'inactive_container'></div> <!-- inactiveボタンの表示場所 -->
+           </div> 
+   　     </div>
+     　 </div> 
+       <!-- rest -->
+   　   <div class=" rest rest_koma action_title">
+     　   <h2>rest</h2>
+       　 <div>
+           <input id='mytext_rest' type='text' placeholder="make a button"/>
+     　    <button onclick="show_rest()">add</button>
+       　  <div class = 'rest_container'></div>    <!-- restボタンの表示場所 -->
+      　  </div>
+     　 </div>
+   　 </div>  <!--active、passiveとrestを並べる最後-->
+  　</div> <!--active,passive,rest,runnningをひとまとまりにの最後-->
+   　　　<!--おみくじの表示-->
+   <div class="kuzi_koma">
+     <h1>Fortune</h1>
+     <div class="side_posi kuzi_all">
+       <div class="kuzi_frame_left"></div>
+       <div class="kuzi_frame_center">
+         <div class="kuzi_circle_l"></div>
+         <div class="kuzi_circle_r"></div>
+         <button id='kuzi_id' onclick='kuzi()' class="kuzi_start">start</button>
+         <div id='kuzi_show' class="kuzi_answer"></div>
+       </div>
+       <div class="kuzi_frame_right"></div>
+     </div>
+   </div>
+ </div>       <!--runnning,active,passive,restとおみくじを並べる最後-->
+</div>
+ </body>
+</head>
+<body></body>
+</html>
+<style>
+  .todo_font{
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .obj_button{
+    border: double 5px rgb(63, 63, 255);
+    background-color: rgb(255, 255, 219);
+    font-weight: bolder;
+  }
+  .add_button{
+    height: 30px;
+    width: 50px;
+    border-radius: 50%;
+    border: solid 3px black ;
+    background-color: white;
+  }
+  .all_clear_button{
+    height: 30px;
+    width: auto;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+  }
+  .obj_font{
+    width: 60px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: 30px;
+    border-bottom: solid 10px red;
+  }
+   .kuzi_all{
+     background-color: rgb(214, 121, 0);
+   }
+   .kuzi_circle_r{
+    margin-left: 230px;
+    margin-top: -7px;
+    width: 30px;
+    height: 30px;
+    border: solid 20px black;
+    border-radius: 50%;
+    background-color: white;
+  }
+  .kuzi_circle_l{
+    margin-bottom: -70px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid 20px black;
+    display: flex;
+    background-color: white;
+  }
+  .kuzi_answer{
+    margin-left: 50px;
+    font-size: 100px;
+  }
+  .kuzi_start{
+    border: solid 5px black;
+    background-color: rgb(255, 106, 106);
+    margin-top: 50px;
+    margin-left: 75px;
+    width: 150px;
+    height: 70px;
+    font-size: 40px;
+  }
+  .kuzi_frame_right{
+    height: 100px;
+    width: 100px;
+    background-image: linear-gradient(
+      to right top,
+      transparent 48%,
+      black 48%,
+      black 52%,
+      white 52%
+    );
+    
+  }
+  .kuzi_frame_left{
+
+    height: 100px;
+    width: 100px;
+    background-image: linear-gradient(
+      to left top,
+      transparent 48%,
+      black 48%,
+      black 52%,
+      white 52%
+    );
+    
+  }
+  .kuzi_frame_center{
+    background-color: rgb(255, 156, 27);
+    border-left: solid 5px black;
+    border-right: solid 5px black;
+    border-top: solid 5px black;
+    width: 300px;
+    height: 572px;
+    margin: auto;
+  }
+    .todo_koma {
+    position: relative;
+    width: 800px;
+    min-height: 600px;
+    height: auto;
+    margin: 2em 0;
+    padding: 25px 10px 7px;
+    border: solid 5px black;
+    background-image: url('town_sea_mono.jpg');
+}
+.todo_koma .todo-left {
+    min-width: 300px;
+    min-height: 400px;
+    width: auto;
+    height: auto;
+    max-height: 90%;
+    position: absolute;
+    display: inline-block;
+    top: -2px;
+    left: -2px;
+    padding: 0 9px;
+    line-height: 25px;
+    border-bottom: solid 3px black;
+    border-right: solid 3px black;
+    background-color: white;
+    box-shadow: 0 0 8px black;
+}
+.todo_koma .todo-right {
+    height: 350px;
+    min-width: 200px;
+    width: auto;
+    position: absolute;
+    display: inline-block;
+    bottom: -2px;
+    right: -2px;
+    padding: 0 9px;
+    line-height: 25px;
+    border-top: solid 3px black;
+    border-left: solid 3px black;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 0 0 8px black;
+}
+  .run_box {
+    margin: 15px;
+    position: relative;
+    width: 800px;
+    height: 400px;
+    padding: 25px 10px 7px;
+    border: solid 5px black;
+    background-image: url('mou_sea_monokuro.jpg');
+}
+.run_box .box-left {
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    display: inline-block;
+    top: -2px;
+    left: -2px;
+    padding: 0 9px;
+    line-height: 25px;
+    border-bottom: solid 3px black;
+    border-right: solid 3px black;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 0 0 8px black;
+}
+.run_box .box-right {
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    display: inline-block;
+    bottom: -2px;
+    right: -2px;
+    padding: 0 9px;
+    line-height: 25px;
+    border-top: solid 3px black;
+    border-left: solid 3px black;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 0 0 8px black;
+}
+
+  .active_name_font_size{
+    font-size: 50px;
+    margin-bottom: 50px;
+  }
+  .zikkoutyuu{
+    font-size: 30px;
+    margin-top: 250px;
+  }
+  .run_font_size{
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-bottom:solid 3px red ;
+  }
+  .width_auto{
+    width: auto;
+  }
+    .huki-left {
+  position: relative;
+  display: inline-block;
+  margin-left: 12px;
+  padding: 7px 10px;
+  width: auto;
+  color: #555;
+  font-size: 16px;
+  background: #FFF;
+  border: solid 3px #555;
+  box-sizing: border-box;
+  display: none;
+}
+
+.huki-left:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-right: 12px solid white;
+  z-index: 2;
+  
+}
+
+.huki-left:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -14px;
+  border: 14px solid transparent;
+  border-right: 14px solid #555;
+  z-index: 1;
+}
+
+    .obj_koma{
+      width: 800px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .todo_koma{
+      width: 700px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .sch_koma{
+      width: 1480px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .re_koma{
+      width: 1480px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .run_koma{
+      width: 600px;
+      height: 300px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+      position: relative;
+      z-index: 2;
+    }
+    .run_left{
+      width: 200px;
+      height: 150px;
+      background-color: white;
+      border: solid 5px black;
+      position: absolute;
+      z-index: 1;
+    }
+    .ap_koma{
+      width:530px;
+      margin: 0px;
+      background-color: white;
+      border: solid 5px black;
+    } 
+    .rest_koma{
+      margin: 0px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .kuzi_koma{
+      width: 500px;
+      height: 680px;
+      margin: 15px;
+      background-color: white;
+      border: solid 5px black;
+    }
+    .obj_more {
+      position: relative;
+      padding: 0.6em;
+      background-color: white;
+}
+
+    .obj_more:after {
+      position: absolute;
+      content: '';
+      top: -65%;
+      left: 30px;
+      border: 15px solid transparent;
+      border-bottom: 15px solid black;
+      width: 0;
+      height: 0;
+}
+    .text_center{
+      align-items: center;
+    }
+    .title {
+      background-image: url('段ボール.jpg');
+    }
+    .title h1 {
+      padding: 0.2em;/*文字周りの余白*/
+      color: black;/*文字色*/
+      background:  rgb(201, 255, 187);/*背景色*/
+      border-left: solid 5px green;/*左線（実線 太さ 色）*/
+      }
+    .action_title h2 {
+      padding: 0.2em;/*文字周りの余白*/
+      display: inline-block;/*おまじない*/
+      line-height: 1.3;/*行高*/
+      background: white;/*背景色*/
+      vertical-align: middle;
+      border-radius: 25px 25px 25px 25px;/*左側の角を丸く*/
+    }
+    .block_center{
+      display: block;
+      margin-left: 124px;
+      }
+    .rest{
+      text-align: center;
+      background-color: rgb(248, 151, 151);
+    }
+    .inactive{
+      width: 250px;
+      text-align: center;
+      background-color: rgb(255, 255, 153);
+    }
+    .active{
+      width: 250px;
+      text-align: center;
+      background-color: rgb(0, 255, 150);
+    }
+ 
+    .side_posi{
+      display: flex;
+    }  
+    .ymw_name{
+      width: 170px;
+      height: 30px;
+    }
+    .huki-left.change{
+      display: block;
+    }
+    .this_year.change {
+       width: 100px;
+       height: 50px;
+       display: block;
+    }
+     .this_year {
+       width: 100px;
+       height: 50px;
+       display: none;
+     };
+     .time_color{
+        background-color: aqua;
+    }
+     .addition {
+       width: 50px;
+       height: 50px;
+       --color: rgb(50,1,50);
+       background-color: var(--color);
+    }
+     .addition_inactive {
+       width: 50px;
+       height: 50px;
+       --color_inactive: rgb(0,100,50);
+       background-color: var(--color_inactive);
+    }
+     .addition_gragh{
+       --wid: 1px;
+       height: 50px;
+       width: var(--wid);
+       --color_gragh: rgb(0,100,50);
+       background-color: var(--color_gragh);
+    }
+     .backboard_schedule {
+       width: 1350px;
+       height: 50px;
+       position: relative;
+       background-color: black;
+     }
+     .schedule {
+       --color: rgb(247, 244, 244);
+       --wid: 1px;
+       width: var(--wid);
+       height: 50px;
+       background-color: var(--color);
+       position: absolute;
+       --left: 50px;
+       left: var(--left);
+     }
+     .rest_color{
+       width: 50px;
+       height: 50px;
+       background-color: white;
+     }
+</style>
+<!-- activeのjava -->
+<script src='active.js' defer></script>
+<!-- inactiveのjava -->
+<script src='inactive.js' defer></script>
+<!-- restのjava -->
+<script src='rest.js' defer></script>
+<!-- todoのjava -->
+<script src='todo_list.js' defer></script>
+<!--scheduleのjava-->
+<script src='schedule.js' defer></script>
+<!--kuziのjava-->
+<script src='kuzi.js' defer></script>
+<script src='object.js' defer></script>
